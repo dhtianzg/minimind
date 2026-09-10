@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
-import torch_npu  # noqa: F401  导入 torch_npu 后，torch.npu 命名空间才可用（CPU 机器上导入也不报错）
+# noqa: F401  导入 torch_npu 后，torch.npu 命名空间才可用（CPU 机器上导入也不报错）
+# import torch_npu
 
 
 class RMSNorm(nn.Module):
@@ -82,9 +83,10 @@ def test_rms_norm(device):
 
 if __name__ == "__main__":
     # 设备选择：优先 NPU 0（真机运行），NPU 不可用时回退 CPU
-    device = torch.device("npu:0" if torch.npu.is_available() else "cpu")
+    # device = torch.device("npu:0" if torch.npu.is_available() else "cpu")
+    device = torch.device("cpu")
     print(f"使用设备: {device}")
-    print(f"NPU 可用: {torch.npu.is_available()}, 设备数量: {torch.npu.device_count()}")
+    # print(f"NPU 可用: {torch.npu.is_available()}, 设备数量: {torch.npu.device_count()}")
 
     test_rms_norm(device)
     print("\n===== 所有测试完成 =====")
